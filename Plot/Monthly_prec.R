@@ -44,7 +44,6 @@ rm(FileName); gc()
 ##__Packages________________________________________________________________####
 library(hydroTSM)
 library(zoo)
-
 ##__contenu_script__________________________________________________________####
 FileInfobv <- paste0(DIR_DATA_INPUT_RDATA, "InfoPluvio/infoPluvio_Real.RData")
 load(FileInfobv); rm(FileInfobv); gc()
