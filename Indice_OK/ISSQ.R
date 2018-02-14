@@ -28,7 +28,7 @@ gc()
 DIR_DATA_INPUT          <- "DataInput/"
 DIR_DATA_INPUT_RDATA    <- paste0(DIR_DATA_INPUT, "bvRdata/")
 DIR_DATA_OUTPUT         <- "DataOutput/"
-DIR_FUNCTIONS           <- "Functions/"
+DIR_FUNCTIONS           <- "Functions_R/"
 DIR_GRAPHE              <- paste0(DIR_DATA_OUTPUT, "Graphes/")
 DIR_FUNCTIONS_LOIEAU    <- "H:/Workspace_R/Fonctions_LOIEAU"
 
@@ -55,7 +55,7 @@ rownames(Sech) <- infobv$nom
 colnames(Sech) <- c("ExWet", "VWet", "Wet", "Normal", "Dry", "VDry", "ExDry")
 
 pdf(paste0(DIR_GRAPHE,"ISSQ_BV/ISSQ.pdf"), paper ="a4r", height=0, width=0)
-for (iBV in c(1:1)){ #length(infobv$code)
+for (iBV in 1:length(infobv$code)) {
   ##__Choix_Basin_ou_Boucles_Sur_Plusieurs_Basins_____________________________####
   BVCode <- infobv$code[iBV]
   
@@ -67,11 +67,6 @@ for (iBV in c(1:1)){ #length(infobv$code)
   #Passage des données journalières au mensuelles
   Qday <- zoo(BasinData$TabObsQmm, order.by = as.Date(BasinData$TabDatesR))
   MonthlyData <- fc.daily2monthly(Qday, FUN = sum, na.rm = TRUE, threshold = 0.1)
-  
-  Decile_mois <- rep(NA, 12)
-  for(mois in 1:12){
-    Decile <- fc.CalcStat(extract(MonthlyData, trgt = mois), debYear = "08-01")
-  }
   
   #Fonction pour calculer le ISSQ
   Resultat <- fc.ISSQ(MonthlyData)
