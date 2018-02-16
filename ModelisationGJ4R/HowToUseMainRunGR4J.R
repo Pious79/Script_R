@@ -10,13 +10,13 @@
 # ---- si travail sur le serveur
 User <- "Pierre"
 # ---- si travail en local
-Disc <- "C"
+Disc <- "H"
 
-if (substr(version$os, 1, 5) == "linux") {
+if(substr(version$os, 1, 5) == "linux") {
   DIR_ROOT <- paste0("/home/RHAX21/UTILISATEURS/", User, "/Workspace_R/")
 } else {
-  if (Disc == "X") {
-    DIR_ROOT <- paste0(Disc, ":/UTILISATEURS/", User, "/Workspace_R/")
+  if(Disc == "H") {
+    DIR_ROOT <- paste0(Disc, ":/Workspace_R/")
   } else {
     DIR_ROOT <- paste0(Disc, ":/Users/pierre.lhermite/Documents/Pierre/Workspace_R/")
   }
@@ -28,15 +28,15 @@ rm(list = ls())
 gc()
 
 ##__Directories_____________________________________________________________####
-DIR_DATA_INPUT       <- "DataInput/"
-DIR_DATA_INPUT_RDATA <- paste0(DIR_DATA_INPUT, "bvRdata/")
-DIR_DATA_OUTPUT      <- "DataOutput/"
-DIR_FUNCTIONS        <- "Functions/"
-DIR_GRAPHE           <- paste0(DIR_DATA_OUTPUT, "Graphes/")
-DIR_FUNCTIONS_LOIEAU    <- "X:/UTILISATEURS/LOIEAU/Workspace_R/Functions"
+DIR_DATA_INPUT          <- "DataInput/"
+DIR_DATA_INPUT_RDATA    <- paste0(DIR_DATA_INPUT, "bvRdata/")
+DIR_DATA_OUTPUT         <- "DataOutput/"
+DIR_FUNCTIONS           <- "Functions_R/"
+DIR_GRAPHE              <- paste0(DIR_DATA_OUTPUT, "Graphes/")
+DIR_FUNCTIONS_LOIEAU    <- "H:/Workspace_R/Fonctions_LOIEAU"
 
 ##__Functions_______________________________________________________________####
-for (FileName in list.files(DIR_FUNCTIONS, pattern = "\\.[Rr]$")) {
+for(FileName in list.files(DIR_FUNCTIONS, pattern = "\\.[Rr]$")) {
   source(file.path(DIR_FUNCTIONS, FileName))
 }
 for(FileName in list.files(DIR_FUNCTIONS_LOIEAU, pattern = "\\.[Rr]$")) {
