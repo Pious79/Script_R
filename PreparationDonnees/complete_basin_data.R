@@ -42,6 +42,7 @@ for(FileName in list.files(DIR_FUNCTIONS_LOIEAU, pattern = "\\.[Rr]$")) {
 }
 rm(FileName); gc()
 
+
 ##__Packages________________________________________________________________####
 library(zoo)
 

@@ -43,7 +43,10 @@ for(FileName in list.files(DIR_FUNCTIONS_LOIEAU, pattern = "\\.[Rr]$")) {
 rm(FileName); gc()
 
 ##__Packages________________________________________________________________####
-library(rgdal); library(maptools); library(raster); library(zoo)
+library(rgdal)
+library(maptools)
+library(raster)
+library(zoo)
 
 ##__Definition_des_projections______________________________________________####
 prjs.L2E <- CRS("+init=epsg:27572")
