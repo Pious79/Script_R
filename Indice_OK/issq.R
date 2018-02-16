@@ -54,7 +54,7 @@ Sech <- as.data.frame(matrix(NA, nrow = length(infobv$code) , ncol = 7))
 rownames(Sech) <- infobv$nom
 colnames(Sech) <- c("ExWet", "VWet", "Wet", "Normal", "Dry", "VDry", "ExDry")
 
-pdf(paste0(DIR_GRAPHE,"ISSQ_BV/ISSQ.pdf"), paper ="a4r", height=0, width=0)
+pdf(paste0(DIR_GRAPHE,"ISSQ_BV/ISSQ_60.pdf"), paper ="a4r", height=0, width=0)
 for (iBV in 1:length(infobv$code)) {
   ##__Choix_Basin_ou_Boucles_Sur_Plusieurs_Basins_____________________________####
   BVCode <- infobv$code[iBV]
@@ -69,10 +69,10 @@ for (iBV in 1:length(infobv$code)) {
   MonthlyData <- fc.daily2monthly(Qday, FUN = sum, na.rm = TRUE, threshold = 0.1)
   
   #Fonction pour calculer le ISSQ
-  Resultat <- fc.ISSQ(MonthlyData)
+  Resultat <- issq(MonthlyData)
   
   #Trace les graphiques avec les résultats de MK, Sen et Pettitt
-  fc.plot_MK_Sen_SQMK_Pettitt(data = Resultat$ISSQ, type_data = "ISSQ",
+  plot_trend(data = Resultat$ISSQ, type_data = "ISSQ",
                               bv_nom = infobv$nom[iBV], nom_axex = "Annee",
                               nom_axey = "ISSQ [-]")
   
