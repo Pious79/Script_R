@@ -59,13 +59,13 @@ for(Delta in c(1, 3, 6, 9, 12, 24)){
   rownames(Sech) <- infoPluvio$nom
   colnames(Sech) <- c("ExWet", "VWet", "Wet", "Normal", "Dry", "VDry", "ExDry")
   
-  pdf(paste0(DIR_GRAPHE,"PNI_Pluvio/PNI_",Delta,".pdf"), paper ="a4r",
+  pdf(paste0(DIR_GRAPHE,"PNI_Pluvio/PNI_test_",Delta,".pdf"), paper ="a4r",
       height=0, width=0)
   for (iPluvio in c(1:length(infoPluvio$code))){
-    ##__Choix_Basin_ou_Boucles_Sur_Plusieurs_Basins_____________________________####
+    ##__Choix_Basin_ou_Boucles_Sur_Plusieurs_Basins_________________________####
     PluvioCode <- infoPluvio$code[iPluvio]
     
-    ##__BasinData_______________________________________________________________####
+    ##__BasinData___________________________________________________________####
     ## RData a creer en amont de ce script, voir script Prep_BasinData.R
     load(paste0(DIR_DATA_INPUT_RDATA, "PluvioData_Real/PluvioData_",
                 PluvioCode, ".RData"))
@@ -78,7 +78,7 @@ for(Delta in c(1, 3, 6, 9, 12, 24)){
     
     Sech[iPluvio, ] <- Res$Drought$Pluvio
     
-    plot_trend(Res$PNI, type_data = paste0("PNI", Delta),
+    plot_trend(Res$PNI, trend = TRUE, type_data = paste0("PNI", Delta),
                 nom_axex = "Temps", nom_axey = "PNI",
                 bv_nom = PluvioData$PluvioName, mid_value = 100)
   }
