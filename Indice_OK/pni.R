@@ -78,7 +78,7 @@ for(Delta in c(1, 3, 6, 9, 12, 24)){
     
     Sech[iPluvio, ] <- Res$Drought$Pluvio
     
-    plot_trend(Res$PNI, trend = TRUE, data_kind = paste0("PNI", Delta),
+    plot_trend(Res$PNI, trend = FALSE, data_kind = paste0("PNI", Delta),
                 axis_name_x = "Temps", axis_name_y = "PNI",
                 name = PluvioData$PluvioName, mid_value = 100)
   }
