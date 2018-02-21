@@ -45,19 +45,22 @@ rm(FileName); gc()
 ##__Packages________________________________________________________________####
 library(zoo)
 library(hydroTSM)
+library(pheno)
+library(Kendall)
+library(trend)
 
 ##__contenu_script__________________________________________________________####
 
 FileInfobv <- paste0(DIR_DATA_INPUT_RDATA, "InfoPluvio/infoPluvio_Real.RData")
 load(FileInfobv); rm(FileInfobv); gc()
 
-
 for(Delta in c(1, 3, 6, 9, 12, 24)){
   Sech <- as.data.frame(matrix(NA, nrow = length(infoPluvio$code) , ncol = 7))
   rownames(Sech) <- infoPluvio$nom
   colnames(Sech) <- c("ExWet", "VWet", "Wet", "Normal", "Dry", "VDry", "ExDry")
   
-  pdf(paste0(DIR_GRAPHE,"PNI_Pluvio/PNI_",Delta,".pdf"), paper ="a4r", height=0, width=0)
+  pdf(paste0(DIR_GRAPHE,"PNI_Pluvio/PNI_",Delta,".pdf"), paper ="a4r",
+      height=0, width=0)
   for (iPluvio in c(1:length(infoPluvio$code))){
     ##__Choix_Basin_ou_Boucles_Sur_Plusieurs_Basins_____________________________####
     PluvioCode <- infoPluvio$code[iPluvio]
@@ -71,13 +74,13 @@ for(Delta in c(1, 3, 6, 9, 12, 24)){
     Pday <- zoo(PluvioData$TabcompleteP, order.by = PluvioData$TabDatesR)
     MonthlyData <- fc.daily2monthly(Pday, FUN = sum, na.rm=TRUE, threshold=0.1)
     
-    Res <- fc.PNI(MonthlyData, Delta = Delta)
+    Res <- pni(MonthlyData, Delta = Delta)
     
     Sech[iPluvio, ] <- Res$Drought$Pluvio
     
-    fc.plot_PNI(Res$PNI, type_data = paste0("PNI", Delta),
+    plot_trend(Res$PNI, type_data = paste0("PNI", Delta),
                 nom_axex = "Temps", nom_axey = "PNI",
-                bv_nom = PluvioData$PluvioName)
+                bv_nom = PluvioData$PluvioName, mid_value = 100)
   }
   
   save(Sech, file = paste0(DIR_GRAPHE, "PNI_Pluvio/Sech_PNI_",Delta,".RData"))
