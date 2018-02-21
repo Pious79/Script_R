@@ -78,9 +78,9 @@ for(Delta in c(1, 3, 6, 9, 12, 24)){
     
     Sech[iPluvio, ] <- Res$Drought$Pluvio
     
-    plot_trend(Res$PNI, trend = TRUE, type_data = paste0("PNI", Delta),
-                nom_axex = "Temps", nom_axey = "PNI",
-                bv_nom = PluvioData$PluvioName, mid_value = 100)
+    plot_trend(Res$PNI, trend = TRUE, data_kind = paste0("PNI", Delta),
+                axis_name_x = "Temps", axis_name_y = "PNI",
+                name = PluvioData$PluvioName, mid_value = 100)
   }
   
   save(Sech, file = paste0(DIR_GRAPHE, "PNI_Pluvio/Sech_PNI_",Delta,".RData"))
